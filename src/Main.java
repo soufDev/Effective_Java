@@ -3,11 +3,16 @@ import item2.NutritionFacts;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-        NutritionFacts pespi = new NutritionFacts.Builder(215, 56)
-                .sodium(125)
-                .calories(356)
-                .build();
-        System.out.println(pespi.toString());
+        long time = System.currentTimeMillis();
+        long sum = 0;
+        for(long i=0; i< Integer.MAX_VALUE ; i++)
+            sum += i;
+        System.out.println("time: "+(System.currentTimeMillis()-time) );
+        System.out.println("sum: "+sum);
+
+        int j = 0;
+        System.out.println("j = "+(j++));
+        System.out.println("j = "+(j));
+
     }
 }
