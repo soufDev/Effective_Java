@@ -3,7 +3,7 @@ package item6;
 import java.util.Arrays;
 import java.util.EmptyStackException;
 
-public class Stack {
+public class Stack implements Cloneable {
     private Object[] elements;
     private int size;
     private static final int DEFAULT_INITIAL_CAPACITY = 16;
@@ -31,4 +31,19 @@ public class Stack {
             elements = Arrays.copyOf(elements, 2 * size +1);
     }
 
+    @Override
+    public Stack clone() {
+        try {
+            Stack result = (Stack) super.clone();
+            result.elements = elements.clone();
+            return result;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
+
+    public static void main(String[] arg) {
+        Stack stack = new Stack();
+        System.out.println(stack.clone());
+    }
 }

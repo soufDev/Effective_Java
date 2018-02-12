@@ -3,7 +3,7 @@ package item9;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class PhoneNumber {
+public final class PhoneNumber implements Cloneable{
     private volatile int hashCode;
 
     private final short areaCode;
@@ -59,11 +59,21 @@ public final class PhoneNumber {
                 '}';
     }
 
+    @Override
+    public PhoneNumber clone() {
+        try {
+            return (PhoneNumber) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
+
     public static void main(String[] arg) {
         Map<PhoneNumber, String> map = new HashMap<PhoneNumber, String>();
         PhoneNumber pn = new PhoneNumber(213, 773, 3533);
         map.put(pn, "Jennifer");
         System.out.println(map.get(new PhoneNumber(213, 773, 3533)));
         System.out.println("Failed to connect to : " + pn);
+        System.out.println(pn.clone());
     }
 }
