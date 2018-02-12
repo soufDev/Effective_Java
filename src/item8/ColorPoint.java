@@ -2,21 +2,27 @@ package item8;
 
 import java.awt.*;
 
-public class ColorPoint extends Point {
+public class ColorPoint {
     private final Color color;
+    private final Point point;
 
     public ColorPoint(int x, int y, Color color) {
-        super(x, y);
+        if(color==null)
+            throw new NullPointerException();
+        this.point = new Point(x, y);
         this.color = color;
+    }
+
+    public Point asPoint() {
+        return point;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Point))
-            return false;
         if (!(o instanceof ColorPoint))
-            return o.equals(this);
-        return super.equals(o) && ((ColorPoint) o).color == color;
+            return false;
+        ColorPoint cp = (ColorPoint) o;
+        return cp.point.equals(point) && cp.color.equals(color);
     }
 
     public static void main(String[] arg) {
@@ -24,6 +30,6 @@ public class ColorPoint extends Point {
         ColorPoint p2 = new ColorPoint(1, 2, Color.YELLOW);
         ColorPoint p3 = new ColorPoint(1, 2, Color.GREEN);
 
-        System.out.println(p1.equals(p2)+" - "+p3.equals(p1));
+        System.out.println(p1.equals(p2)+" - "+p3.equals(null));
     }
 }
