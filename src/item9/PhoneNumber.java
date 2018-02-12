@@ -50,9 +50,20 @@ public final class PhoneNumber {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "PhoneNumber{" +
+                "areaCode=" + areaCode +
+                ", prefix=" + prefix +
+                ", lineNumber=" + lineNumber +
+                '}';
+    }
+
     public static void main(String[] arg) {
         Map<PhoneNumber, String> map = new HashMap<PhoneNumber, String>();
-        map.put(new PhoneNumber(700, 800, 5000), "Jennifer");
-        System.out.println(map.get(new PhoneNumber(700, 800, 5000)));
+        PhoneNumber pn = new PhoneNumber(213, 773, 3533);
+        map.put(pn, "Jennifer");
+        System.out.println(map.get(new PhoneNumber(213, 773, 3533)));
+        System.out.println("Failed to connect to : " + pn);
     }
 }
