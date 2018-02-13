@@ -68,6 +68,22 @@ public final class PhoneNumber implements Cloneable{
         }
     }
 
+    // we have to take care when we use it
+    public int compareTo(PhoneNumber pn) {
+        // compare area codes
+        int areaCodeDiff = areaCode - pn.areaCode;
+        if (areaCodeDiff != 0)
+            return areaCodeDiff;
+
+        // compare prefixes if area codes are equals
+        int prefixDiff = prefix - pn.prefix;
+        if (prefixDiff != 0)
+            return prefixDiff;
+
+        // compare line numbers if Area Codes & prefixes are equals
+        return lineNumber - pn.lineNumber;
+    }
+
     public static void main(String[] arg) {
         Map<PhoneNumber, String> map = new HashMap<PhoneNumber, String>();
         PhoneNumber pn = new PhoneNumber(213, 773, 3533);
