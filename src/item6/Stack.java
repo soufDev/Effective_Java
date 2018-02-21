@@ -17,6 +17,9 @@ public class Stack implements Cloneable {
         elements[size++] = e;
     }
 
+    public boolean isEmpty() {
+        return size == 0;
+    }
     public Object pop() {
         if(size==0)
             throw new EmptyStackException();
