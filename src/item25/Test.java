@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Test<T> {
 
-    static <T> T reduce(List<T> list, Function<T> f, T initVal) {
+    static <T> T reduce(List<? extends T> list, Function<T> f, T initVal) {
         List<T> snapshot; // locks list internally
         synchronized (list) {
             snapshot = new ArrayList<T>(list);

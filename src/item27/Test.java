@@ -3,7 +3,7 @@ package item27;
 import java.util.*;
 
 public class Test {
-    public static <E> Set<E> union(Set<E> s1, Set<E> s2) {
+    public static <E> Set<E> union(Set<? extends E> s1, Set<? extends E> s2) {
         Set<E> result = new HashSet<E>(s1);
         result.addAll(s2);
         return result;
@@ -24,8 +24,8 @@ public class Test {
         return (UnaryFunction<T>) IDENTITY_FUNCTION; // warning
     }
 
-    public <E extends Comparable<E>> E max(List<E> list) {
-        Iterator<E> i = list.iterator();
+    public <E extends Comparable<? super E>> E max(List<? extends E> list) {
+        Iterator<? extends E> i = list.iterator();
         E result = i.next();
         while (i.hasNext()) {
             E e = i.next();
@@ -36,9 +36,10 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        Set<String> s1 = new HashSet<String>(Arrays.asList("azeaze", "aazeaze1", "aezaze2"));
-        Set<String> s2 = new HashSet<String>(Arrays.asList("azeaze3", "aazeaze4", "aezaze5"));
-        System.out.println(union(s1, s2));
+        Set<Integer> s1 = new HashSet<>(Arrays.asList(123, 4));
+        Set<Double> s2 = new HashSet<>(Arrays.asList(12.0, 65.63, 87.21));
+        Set<Number> result = union(s1, s2);
+        System.out.println(result);
 
         String[] strings = { "aze1", "aze2", "aze3" };
         UnaryFunction<String> sameString = identifyFunction();
